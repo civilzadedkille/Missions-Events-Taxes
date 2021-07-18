@@ -1,0 +1,239 @@
+# Variable Calculation
+# Variable Calculation
+######## IMPORTANT NOTICE, THE FOLOLOWING EVENT IS INDEMPOTENT ##############
+namespace = calcul_byob
+country_event = {
+	id = calcul_byob.1
+	
+	title = "calcul_byob.1.t"
+	desc = no_localization
+	picture = MEIOU_AND_TAXES_eventPicture
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		every_country = {
+			limit = {
+				OR = {
+					ai = no
+					is_month = 10
+				}
+			}
+			####################################
+			# MEIOU and Taxes - Demesne_in_Xxxxx
+			####################################
+			set_variable = { which = "Demesne_in_Anatolian_Coast" value = 0 }
+			set_variable = { which = "Demesne_in_Aegean" value = 0 }
+			set_variable = { which = "Demesne_in_Peloponnese" value = 0 }
+			set_variable = { which = "Demesne_in_central_Greece" value = 0 }
+			set_variable = { which = "Demesne_in_northern_Macedonia" value = 0 }
+			set_variable = { which = "Demesne_in_southern_Macedonia" value = 0 }
+			set_variable = { which = "Demesne_in_Epirus" value = 0 }
+			set_variable = { which = "Demesne_in_Albania" value = 0 }
+			set_variable = { which = "Demesne_in_Serbia" value = 0 }
+			set_variable = { which = "Demesne_in_southern_Bulgaria" value = 0 }
+			set_variable = { which = "Demesne_in_northern_Bulgaria" value = 0 }
+
+			####################################
+			# MEIOU and Taxes - Cores_on_Xxxxx
+			####################################
+			#set_variable = { which = "Cores_on_Anatolian_Coast" value = 0 }
+			
+			
+			
+			
+		}
+			####################################
+			# MEIOU and Taxes - Calculations_on_Xxxxx
+			####################################
+			
+			regiongroup = {
+				region = {
+					limit = {
+						owner = {
+							OR = {
+								ai = no
+								is_month = 10
+							}
+						}
+						isValidProv = yes
+					}
+					trigger_switch = {
+						on_trigger = continent
+						mena = {
+							trigger_switch = {
+								on_trigger = superregion
+								anatolia_superregion = {
+									trigger_switch = {
+										on_trigger = region
+										north_anatolia_region = {
+										
+											trigger_switch = {
+												on_trigger = area
+												hudavendigar_area = {
+													if = {
+														limit = {
+															OR = {
+																has_port = yes
+																province_id = 2553 #Iznik/Nikaia
+															}
+														}
+														owner = { change_variable = { which = "Demesne_in_Anatolian_Coast" value = 1 } }
+													}
+												}											
+											}
+										}
+										south_anatolia_region = {
+											trigger_switch = {
+												on_trigger = area
+												manisa_area = { #Marmara
+													owner = { change_variable = { which = "Demesne_in_Anatolian_Coast" value = 1 } }
+												}
+												aydin_area = { #Aegean Anatolia
+													owner = { change_variable = { which = "Demesne_in_Anatolian_Coast" value = 1 } }
+												}
+												teke_area = { 
+													if = {
+														limit = {
+															OR = {
+																province_id = 1439 #Mugla/Doris
+																province_id = 4064 #Marmaris/Karia
+															}
+														}
+														owner = { change_variable = { which = "Demesne_in_Anatolian_Coast" value = 1 } }
+													}
+												}
+											}
+										}
+									}
+								}
+								balkan_superregion = {
+									trigger_switch = {
+										on_trigger = region
+										greece_region = {
+											
+											trigger_switch = {
+												on_trigger = area
+												thrace_area = {
+													if = {
+														limit = {
+															province_id = 5081 #Uskudar/Skoutarion
+														}
+														owner = { change_variable = { which = "Demesne_in_Anatolian_Coast" value = 1 } }
+													}
+													if = {
+														limit = {
+															NOT = { province_id = 5081 } #Uskundar/Skoutarion
+															NOT = { province_id = 2238 } #Gelibolu/Kalipoli
+														}
+														owner = { change_variable = { which = "Demesne_in_northern_Greece" value = 1 } }
+													}
+												}
+												morea_area = {
+													owner = { change_variable = { which = "Demesne_in_Peloponnese" value = 1 } }
+												}
+												thessalia_area = {
+													owner = { change_variable = { which = "Demesne_in_central_Greece" value = 1 } }
+												}
+												aegean_area = {
+													owner = { change_variable = { which = "Demesne_in_Aegean" value = 1 } }
+												}
+												macedonia_area = {
+													owner = { change_variable = { which = "Demesne_in_southern_Macedonia" value = 1 } }
+												}
+												epirus_area = {
+													if = {
+														limit = {
+															NOT = { province_id = 142 } #Corfu
+															NOT = { province_id = 1436 } #Cephalonia
+														}
+													}
+													owner = { change_variable = { which = "Demesne_in_Epirus" value = 1 } }
+												}
+											}
+										}
+										east_balkan_region = {
+											trigger_switch = {
+												on_trigger = area
+												north_macedonia_area = {
+													owner = { change_variable = { which = "Demesne_in_northern_Macedonia" value = 1 } }
+												}
+												south_bulgaria_area = {
+													owner = { change_variable = { which = "Demesne_in_southern_Bulgaria" value = 1 } }
+												}
+												north_bulgaria_area = {
+													owner = { change_variable = { which = "Demesne_in_northern_Bulgaria" value = 1 } }
+												}
+											}
+										}
+										central_balkan_region = {
+											trigger_switch = {
+												on_trigger = area
+												albania_area = {
+													owner = { change_variable = { which = "Demesne_in_Albania" value = 1 } }
+												}
+												south_serbia_area = {
+													owner = { change_variable = { which = "Demesne_in_Serbia" value = 1 } }
+												}
+												north_serbia_area = {
+													owner = { change_variable = { which = "Demesne_in_Serbia" value = 1 } }
+												}
+											}
+										}
+										west_balkan_region = {
+											trigger_switch = {
+												on_trigger = area
+												east_adriatic_coast_area = {
+													if = {
+														limit = {
+															province_id = 138 #Kotor
+														}
+														owner = { change_variable = { which = "Demesne_in_Serbia" value = 1 } }
+													}
+												bosnia_area = {
+													if = {
+														limit = {
+															province_id = 1392 #Travunija
+														}
+														owner = { change_variable = { which = "Demesne_in_Serbia" value = 1 } }
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					
+					
+					
+				}
+			}
+			
+			
+			every_country = {
+				limit = {
+					exists = yes
+					OR = {
+						ai = no
+						is_month = 10
+					}
+					is_subject_other_than_tributary_trigger = yes
+				}
+				##########################################################
+				overlord = {
+					change_variable = { which = "Demesne_in_Anatolian_Coast" which = PREV }
+					change_variable = { which = "Demesne_in_Peloponnese" which = PREV }
+					change_variable = { which = "Demesne_in_central_Greece" which = PREV }
+					change_variable = { which = "Demesne_in_Aegean" which = PREV }
+					change_variable = { which = "Demesne_in_northern_Greece" which = PREV }
+				}
+			}
+		#country_event = { id = calcul_byoa.1 days = 7 }		
+	}
+	option = {
+		name = no_localization
+	}		
+}

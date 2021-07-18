@@ -1,0 +1,21 @@
+on_startup = {
+	if = {
+		limit = {
+			tag = AAA
+		}	
+	
+	# System Setup
+	if = {
+			limit = {
+				# always = yes when not running a sim
+				# always = no when running a sim
+				always = yes
+			}
+			
+			AAA= {
+				country_event = { id = calcul_byob.1 }
+               
+			}
+		}
+	}
+}

@@ -1,0 +1,66 @@
+# Author: Phlopsi 
+
+pulse_system = {
+	potential = {
+		tag = AAA
+	}
+	
+	can_start = {
+		always = yes
+	}
+	
+	can_stop = {
+		always = no
+	}
+	
+	progress = {
+		modifier = {
+			factor = 100
+			
+			always = yes
+		}
+	}
+	
+	can_end = {
+		always = no
+	}
+	
+	on_monthly = {
+		
+		# Last day of month
+		trigger_switch = {
+			on_trigger = is_month
+			
+			11 = { # December
+				country_event = { id = calcul_byob.1 days = 10 }
+			}
+			10 = { # November
+			}
+			09 = { # October
+				country_event = { id = calcul_byob.1 days = 10 }
+			}
+			08 = { # September
+			}
+			07 = { # August
+				country_event = { id = calcul_byob.1 days = 10 }
+			}
+			06 = { # July
+			}
+			05 = { # June
+				country_event = { id = calcul_byob.1 days = 10 }
+			}
+			04 = { # May
+			}
+			03 = { # April
+				country_event = { id = calcul_byob.1 days = 10 }
+			}
+			02 = { # March
+			}
+			01 = { # February
+				country_event = { id = calcul_byob.1 days = 10 }
+			}
+			00 = { # January
+			}
+		}
+	}
+}
